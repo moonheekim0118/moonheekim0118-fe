@@ -5,11 +5,13 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import useUserLoggedIn from '../../hooks/auth/useUserLoggedIn';
+import useLogout from '../../hooks/auth/useLogout';
 
 const Layout = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   const { isLoggedIn, user } = useUserLoggedIn();
+  const logout = useLogout();
 
   useEffect(() => {
     if (isLoggedIn && router.pathname === '/login') {
@@ -28,7 +30,7 @@ const Layout = ({ Component, pageProps }: AppProps) => {
           {isLoggedIn ? (
             <HeaderContents>
               <p>{user.name}</p>
-              <LogoutButton>logout</LogoutButton>
+              <LogoutButton onClick={logout}>logout</LogoutButton>
             </HeaderContents>
           ) : (
             <Link href='/login'>
