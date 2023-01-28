@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import styled from 'styled-components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RecoilRoot } from 'recoil';
 
 import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -18,13 +19,15 @@ const client = new QueryClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={client}>
-      <GlobalStyle />
-      <Background />
-      <Content>
-        <Component {...pageProps} />
-      </Content>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={client}>
+        <GlobalStyle />
+        <Background />
+        <Content>
+          <Component {...pageProps} />
+        </Content>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 
