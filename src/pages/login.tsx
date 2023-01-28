@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { FormEvent } from 'react';
 import styled from 'styled-components';
 
 import TextInputField from '../components/TextInputField';
 import { INPUT_ID, INPUT_VALIDATOR } from '../constants/input';
+import useLogin from '../hooks/auth/useLogin';
 
 import useInput from '../hooks/useInput';
 
@@ -17,9 +18,16 @@ const LoginPage: NextPage = () => {
     userId.isError ||
     password.isError;
 
+  const { mutate: postLogin, isLoading } = useLogin();
+
+  const login = (e: FormEvent) => {
+    e.preventDefault();
+    postLogin({ id: userId.value, password: password.value });
+  };
+
   return (
     <>
-      <Form>
+      <Form onSubmit={login}>
         <TextInputField
           type='text'
           id={INPUT_ID.USER_ID}
@@ -34,7 +42,9 @@ const LoginPage: NextPage = () => {
           onChange={password.handleChangeValue}
           onBlur={password.handleValidateValue}
         />
-        <LoginButton disabled={submitDisabled}>로그인</LoginButton>
+        <LoginButton disabled={submitDisabled || isLoading} type='submit'>
+          로그인
+        </LoginButton>
       </Form>
     </>
   );
@@ -42,7 +52,7 @@ const LoginPage: NextPage = () => {
 
 export default LoginPage;
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
