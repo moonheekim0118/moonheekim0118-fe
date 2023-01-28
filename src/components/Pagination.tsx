@@ -1,21 +1,51 @@
-import React from 'react';
 import styled from 'styled-components';
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-const Pagination = () => {
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import usePagination from '../hooks/usePagination';
+
+interface Props {
+  defaultPage: number;
+  count: number;
+  range: number;
+  directUrl: string;
+}
+
+const Pagination = ({ defaultPage, count, range, directUrl }: Props) => {
+  const router = useRouter();
+
+  const { pages, currentPage, hasPrevPage, hasNextPage, changePage, goToPrevPage, goToNextPage } =
+    usePagination({
+      count,
+      range,
+      defaultPage,
+    });
+
+  useEffect(() => {
+    if (currentPage === 1) return;
+
+    router.push(directUrl + currentPage);
+  }, [currentPage, directUrl]);
+
   return (
     <Container>
-      <Button disabled>
+      <Button disabled={!hasPrevPage} onClick={goToPrevPage}>
         <VscChevronLeft />
       </Button>
       <PageWrapper>
-        {[1, 2, 3, 4, 5].map((page) => (
-          <Page key={page} selected={page === 1} disabled={page === 1}>
+        {pages.map((page) => (
+          <Page
+            key={page}
+            selected={page === currentPage}
+            disabled={page === currentPage}
+            onClick={() => changePage(page)}
+          >
             {page}
           </Page>
         ))}
       </PageWrapper>
-      <Button disabled={false}>
+      <Button disabled={!hasNextPage} onClick={goToNextPage}>
         <VscChevronRight />
       </Button>
     </Container>
