@@ -1,20 +1,30 @@
 import type { AppProps } from 'next/app';
 import styled from 'styled-components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
 
 setupMSW();
 
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+  },
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <QueryClientProvider client={client}>
       <GlobalStyle />
       <Background />
       <Content>
         <Component {...pageProps} />
       </Content>
-    </>
+    </QueryClientProvider>
   );
 }
 
