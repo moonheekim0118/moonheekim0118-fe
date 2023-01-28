@@ -1,44 +1,34 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 
-import products from '../../api/data/products.json';
+import useProduct from '../../hooks/products/useProduct';
+import { useRouter } from 'next/router';
 
 const ProductDetailPage: NextPage = () => {
-  const product = products[0];
+  const router = useRouter();
+  const { id } = router.query;
+
+  const { data: product } = useProduct({
+    id: id as string,
+  });
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
-      <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
-      <ProductInfoWrapper>
-        <Name>{product.name}</Name>
-        <Price>{product.price}원</Price>
-      </ProductInfoWrapper>
+      {product && (
+        <>
+          <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
+          <ProductInfoWrapper>
+            <Name>{product.name}</Name>
+            <Price>{product.price}원</Price>
+          </ProductInfoWrapper>
+        </>
+      )}
     </>
   );
 };
 
 export default ProductDetailPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Thumbnail = styled.img`
   width: 100%;
