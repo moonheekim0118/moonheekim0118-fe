@@ -6,11 +6,13 @@ type ProductItemProps = {
   product: Product;
 };
 
+const formatPrice = (price: number) => price.toLocaleString('kr');
+
 const ProductItem = ({ product: { name, thumbnail, price } }: ProductItemProps) => (
   <Container>
     <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
     <Name>{name}</Name>
-    <Price>{price}</Price>
+    <Price>{formatPrice(price)}원</Price>
   </Container>
 );
 
