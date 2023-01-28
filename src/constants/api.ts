@@ -1,0 +1,1 @@
+export const PRODUCTS_PAGINATION_SIZE = 10;
