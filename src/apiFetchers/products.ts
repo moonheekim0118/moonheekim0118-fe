@@ -10,6 +10,13 @@ export const getProducts = async ({
   return data.data;
 };
 
+export const getProduct = async ({ queryKey }: QueryFunctionContext): Promise<ProductResponse> => {
+  const [_, id] = queryKey;
+  const { data } = await fetcher.get(`/products/${id}`);
+
+  return data.data;
+};
+
 interface Product {
   id: string;
   name: string;
