@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { Product } from '../types/product';
@@ -8,13 +9,17 @@ type ProductItemProps = {
 
 const formatPrice = (price: number) => price.toLocaleString('kr');
 
-const ProductItem = ({ product: { name, thumbnail, price } }: ProductItemProps) => (
-  <Container>
-    <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
-    <Name>{name}</Name>
-    <Price>{formatPrice(price)}원</Price>
-  </Container>
-);
+const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => {
+  const router = useRouter();
+
+  return (
+    <Container onClick={() => router.push(`/products/${id}`)}>
+      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
+      <Name>{name}</Name>
+      <Price>{formatPrice(price)}원</Price>
+    </Container>
+  );
+};
 
 export default ProductItem;
 
