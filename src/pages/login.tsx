@@ -1,25 +1,40 @@
-import Link from 'next/link';
 import type { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 
+import TextInputField from '../components/TextInputField';
+import { INPUT_ID, INPUT_VALIDATOR } from '../constants/input';
+
+import useInput from '../hooks/useInput';
+
 const LoginPage: NextPage = () => {
+  const userId = useInput({ initialValue: '', validator: INPUT_VALIDATOR[INPUT_ID.USER_ID] });
+  const password = useInput({ initialValue: '', validator: INPUT_VALIDATOR[INPUT_ID.PASSWORD] });
+
+  const submitDisabled =
+    !INPUT_VALIDATOR[INPUT_ID.USER_ID](userId.value) ||
+    !INPUT_VALIDATOR[INPUT_ID.PASSWORD](password.value) ||
+    userId.isError ||
+    password.isError;
+
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
       <Form>
-        <div>아이디</div>
-        <TextInput type='text' />
-        <div>비밀번호</div>
-        <TextInput type='password' />
-        <LoginButton disabled>로그인</LoginButton>
+        <TextInputField
+          type='text'
+          id={INPUT_ID.USER_ID}
+          isError={userId.isError}
+          onChange={userId.handleChangeValue}
+          onBlur={userId.handleValidateValue}
+        />
+        <TextInputField
+          type='password'
+          id={INPUT_ID.PASSWORD}
+          isError={password.isError}
+          onChange={password.handleChangeValue}
+          onBlur={password.handleValidateValue}
+        />
+        <LoginButton disabled={submitDisabled}>로그인</LoginButton>
       </Form>
     </>
   );
@@ -27,26 +42,12 @@ const LoginPage: NextPage = () => {
 
 export default LoginPage;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
-
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
   padding: 0 20px 40px;
-`;
-
-const TextInput = styled.input`
-  border: 1px solid #000;
+  gap: 16px;
 `;
 
 const LoginButton = styled.button`
@@ -55,7 +56,6 @@ const LoginButton = styled.button`
   border-radius: 12px;
   background-color: #222;
   color: #fff;
-
   &:disabled {
     background-color: #e2e2ea;
   }
