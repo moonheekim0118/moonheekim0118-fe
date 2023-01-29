@@ -19,11 +19,14 @@ const client = new QueryClient({
 });
 
 function MyApp(props: AppProps) {
+  const { Component, pageProps } = props;
   return (
     <RecoilRoot>
       <QueryClientProvider client={client}>
         <GlobalStyle />
-        <Layout {...props} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </QueryClientProvider>
     </RecoilRoot>
   );

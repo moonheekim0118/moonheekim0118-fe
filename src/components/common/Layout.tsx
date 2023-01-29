@@ -1,13 +1,16 @@
-import type { AppProps } from 'next/app';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/router';
 
 import useUserLoggedIn from '../../hooks/auth/useUserLoggedIn';
 import useLogout from '../../hooks/auth/useLogout';
 
-const Layout = ({ Component, pageProps }: AppProps) => {
+interface Props {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: Props) => {
   const router = useRouter();
 
   const { isLoggedIn, user } = useUserLoggedIn();
@@ -38,7 +41,7 @@ const Layout = ({ Component, pageProps }: AppProps) => {
             </Link>
           )}
         </Header>
-        <Component {...pageProps} />
+        {children}
       </Content>
     </>
   );
