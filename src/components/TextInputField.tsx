@@ -7,11 +7,11 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
   id: string;
 }
-const TextInputField = ({ id, isError, ...rest }: Props) => {
+const TextInputField = ({ id, isError, ...props }: Props) => {
   return (
     <Container>
       <Label htmlFor={id}>{INPUT_CONTENTS[id].label}</Label>
-      <Input id={id} isError={isError} {...rest} />
+      <Input id={id} isError={isError} {...props} />
       {isError && <ErrorMessage>{INPUT_CONTENTS[id].errorMessage}</ErrorMessage>}
     </Container>
   );
