@@ -1,6 +1,7 @@
 import { fetcher } from '.';
 import { QueryFunctionContext } from '@tanstack/react-query';
 import { PRODUCTS_PAGINATION_SIZE } from '../constants/api';
+import { Product } from '../types/product';
 
 export const getProducts = async ({
   queryKey,
@@ -16,13 +17,6 @@ export const getProduct = async ({ queryKey }: QueryFunctionContext): Promise<Pr
 
   return data.data;
 };
-
-interface Product {
-  id: string;
-  name: string;
-  thumbnail: string;
-  price: number;
-}
 
 export interface ProductResponse {
   product: Product;
