@@ -17,7 +17,7 @@ const setUp = (page?: string) => {
 };
 
 describe('상품 목록 조회 페이지 (페이지네이션)', () => {
-  it('한 페이지 당 10개의 상품을 보여준다.', async () => {
+  test('한 페이지 당 10개의 상품을 보여준다.', async () => {
     const { container } = setUp();
 
     waitFor(() => {
