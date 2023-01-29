@@ -10,6 +10,7 @@ const useProduct = ({ id }: Props) => {
     select: (data) => {
       return data.product;
     },
+    enabled: !!id,
   });
 };
 
