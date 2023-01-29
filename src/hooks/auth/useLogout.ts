@@ -1,4 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEY } from '../../constants/common';
 import { authStore } from './utils';
 
 const useLogout = () => {
@@ -6,7 +7,7 @@ const useLogout = () => {
 
   const logout = () => {
     authStore.clear();
-    queryClient.invalidateQueries({ queryKey: ['user'] });
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEY.getUserRequiredKey] });
   };
 
   return logout;

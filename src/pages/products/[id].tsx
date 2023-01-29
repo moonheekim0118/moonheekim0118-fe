@@ -6,6 +6,7 @@ import useProduct from '../../hooks/products/useProduct';
 import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { getProduct } from '../../apiFetchers/products';
+import { QUERY_KEY } from '../../constants/common';
 
 export const getStaticPaths = async () => {
   return {
@@ -16,9 +17,9 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps(ctx: GetStaticPropsContext) {
   const queryClient = new QueryClient();
-  const page = parseInt(ctx.params?.id as string) || 1;
+  const id = (ctx.params?.id as string) || '1';
 
-  await queryClient.prefetchQuery(['product', page], getProduct);
+  await queryClient.prefetchQuery(QUERY_KEY.product(id), getProduct);
 
   return {
     props: {

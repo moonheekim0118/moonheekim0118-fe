@@ -5,15 +5,15 @@ import styled from 'styled-components';
 import { getProducts } from '../apiFetchers/products';
 import Pagination from '../components/Pagination';
 import ProductList from '../components/ProductList';
-import { CLIENT_PATHNAME } from '../constants/common';
+import { CLIENT_PATHNAME, QUERY_KEY } from '../constants/common';
 
 import useProducts from '../hooks/products/useProducts';
 
 export async function getStaticProps(ctx: GetStaticPropsContext) {
   const queryClient = new QueryClient();
-  const page = parseInt(ctx.params?.page as string) || 1;
+  const page = (ctx.params?.page as string) || '1';
 
-  await queryClient.prefetchQuery(['products', page], getProducts);
+  await queryClient.prefetchQuery(QUERY_KEY.products(page), getProducts);
 
   return {
     props: {
@@ -26,7 +26,7 @@ const PaginationPage = () => {
   const router = useRouter();
   const { page } = router.query;
 
-  const { data } = useProducts({ page: page ?? '1' });
+  const { data } = useProducts({ page: (page as string) ?? '1' });
 
   const handleChangePage = (page: number) => {
     router.push(`${CLIENT_PATHNAME.PAGINATION}?page=${page}`);

@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '../../apiFetchers/products';
 import { PRODUCTS_PAGINATION_SIZE } from '../../constants/api';
+import { QUERY_KEY } from '../../constants/common';
 
 interface Props {
-  page: string | string[] | undefined;
+  page: string;
 }
 
 const useProducts = ({ page }: Props) => {
-  return useQuery(['products', page], getProducts, {
+  return useQuery(QUERY_KEY.products(page), getProducts, {
     useErrorBoundary: true,
     select: ({ products, totalCount }) => {
       return {
