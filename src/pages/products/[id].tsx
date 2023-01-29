@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { getProduct } from '../../apiFetchers/products';
 import { QUERY_KEY } from '../../constants/common';
+import { formatPrice } from '../../utilities';
 
 export const getStaticPaths = async () => {
   return {
@@ -43,7 +44,7 @@ const ProductDetailPage: NextPage = () => {
           <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
           <ProductInfoWrapper>
             <Name>{product.name}</Name>
-            <Price>{product.price}원</Price>
+            <Price>{formatPrice(product.price)}원</Price>
           </ProductInfoWrapper>
         </>
       )}
