@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import { QUERY_KEY } from '../../constants/common';
+import { QUERY_KEY } from '../../constants/api';
 import { authStore } from './utils';
 
 const useLogout = () => {

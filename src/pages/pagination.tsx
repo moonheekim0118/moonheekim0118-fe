@@ -8,7 +8,8 @@ import { getProducts } from '../apiFetchers/products';
 import Pagination from '../components/Pagination';
 import ProductList from '../components/ProductList';
 import useProducts from '../hooks/products/useProducts';
-import { CLIENT_PATHNAME, QUERY_KEY } from '../constants/common';
+import { CLIENT_PATHNAME } from '../constants/common';
+import { QUERY_KEY } from '../constants/api';
 
 const DEFAULT_PAGE = '1';
 const PAGE_RANGE = 5;

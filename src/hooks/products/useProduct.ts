@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { getProduct } from '../../apiFetchers/products';
-import { QUERY_KEY } from '../../constants/common';
+import { QUERY_KEY } from '../../constants/api';
 
 interface Props {
   id: string;

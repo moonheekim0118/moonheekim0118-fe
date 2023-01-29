@@ -3,7 +3,8 @@ import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 
 import { login, LoginParams, LoginResponse } from '../../apiFetchers/auth';
-import { CLIENT_PATHNAME, QUERY_KEY } from '../../constants/common';
+import { CLIENT_PATHNAME } from '../../constants/common';
+import { QUERY_KEY } from '../../constants/api';
 import { authStore } from './utils';
 
 const useLogin = () => {

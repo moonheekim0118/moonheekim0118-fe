@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import useProduct from '../../hooks/products/useProduct';
 
 import { getProduct } from '../../apiFetchers/products';
-import { QUERY_KEY } from '../../constants/common';
+import { QUERY_KEY } from '../../constants/api';
 import { formatPrice } from '../../utilities';
 
 export const getStaticPaths = async () => {

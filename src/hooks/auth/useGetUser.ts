@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { useSetRecoilState } from 'recoil';
 
 import { getUser, UserResponse } from '../../apiFetchers/auth';
-import { QUERY_KEY } from '../../constants/common';
+import { QUERY_KEY } from '../../constants/api';
 import { userState } from '../../globalStates/auth';
 import { authStore } from './utils';
 
