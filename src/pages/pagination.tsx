@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { getProducts } from '../apiFetchers/products';
 import Pagination from '../components/Pagination';
 import ProductList from '../components/ProductList';
+import { CLIENT_PATHNAME } from '../constants/common';
 
 import useProducts from '../hooks/products/useProducts';
 
@@ -28,7 +29,7 @@ const PaginationPage = () => {
   const { data } = useProducts({ page: page ?? '1' });
 
   const handleChangePage = (page: number) => {
-    router.push(`/pagination?page=${page}`);
+    router.push(`${CLIENT_PATHNAME.PAGINATION}?page=${page}`);
   };
 
   return (

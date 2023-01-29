@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import useUserLoggedIn from '../../hooks/auth/useUserLoggedIn';
 import useLogout from '../../hooks/auth/useLogout';
+import { CLIENT_PATHNAME } from '../../constants/common';
 
 interface Props {
   children: ReactNode;
@@ -17,8 +18,8 @@ const Layout = ({ children }: Props) => {
   const logout = useLogout();
 
   useEffect(() => {
-    if (isLoggedIn && router.pathname === '/login') {
-      router.push('/');
+    if (isLoggedIn && router.pathname === CLIENT_PATHNAME.LOGIN) {
+      router.push(CLIENT_PATHNAME.HOME);
     }
   }, [router, isLoggedIn]);
 
@@ -27,7 +28,7 @@ const Layout = ({ children }: Props) => {
       <Background />
       <Content>
         <Header>
-          <Link href='/'>
+          <Link href={CLIENT_PATHNAME.HOME}>
             <Title>HAUS</Title>
           </Link>
           {isLoggedIn ? (
@@ -36,7 +37,7 @@ const Layout = ({ children }: Props) => {
               <LogoutButton onClick={logout}>logout</LogoutButton>
             </HeaderContents>
           ) : (
-            <Link href='/login'>
+            <Link href={CLIENT_PATHNAME.LOGIN}>
               <p>login</p>
             </Link>
           )}

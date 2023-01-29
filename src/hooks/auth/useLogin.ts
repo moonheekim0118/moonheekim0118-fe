@@ -3,6 +3,7 @@ import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 
 import { login, LoginParams, LoginResponse } from '../../apiFetchers/auth';
+import { CLIENT_PATHNAME } from '../../constants/common';
 import { authStore } from './utils';
 
 const useLogin = () => {
@@ -14,7 +15,7 @@ const useLogin = () => {
     {
       onSuccess: (data) => {
         authStore.set({ accessToken: data.accessToken, userId: data.user.id });
-        router.push('/');
+        router.push(CLIENT_PATHNAME.HOME);
       },
     }
   );

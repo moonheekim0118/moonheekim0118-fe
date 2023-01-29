@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { CLIENT_PATHNAME } from '../constants/common';
 
 import { Product } from '../types/product';
 
@@ -10,7 +11,7 @@ const formatPrice = (price: number) => price.toLocaleString('kr');
 
 const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => {
   return (
-    <Container href={`/products/${id}`}>
+    <Container href={`${CLIENT_PATHNAME.PRODUCTS}/${id}`}>
       <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
       <Name>{name}</Name>
       <Price>{formatPrice(price)}원</Price>
