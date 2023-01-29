@@ -1,4 +1,4 @@
-import { Component, ReactNode, PropsWithChildren } from 'react';
+import { Component, ReactNode } from 'react';
 import RuntimeError from './RuntimeError';
 
 interface Props {
