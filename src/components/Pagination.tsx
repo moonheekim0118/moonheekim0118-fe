@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import usePagination from '../hooks/usePagination';
@@ -13,8 +12,6 @@ interface Props {
 }
 
 const Pagination = ({ defaultPage, count, range, onChangePage }: Props) => {
-  const router = useRouter();
-
   const { pages, currentPage, hasPrevPage, hasNextPage, changePage, goToPrevPage, goToNextPage } =
     usePagination({
       count,
@@ -24,7 +21,7 @@ const Pagination = ({ defaultPage, count, range, onChangePage }: Props) => {
 
   useEffect(() => {
     onChangePage(currentPage);
-  }, [currentPage, onChangePage]);
+  }, [currentPage]);
 
   return (
     <Container>
