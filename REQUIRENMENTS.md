@@ -52,4 +52,4 @@
   - 이유 : 제품 목록 페이지는 모든 사용자에게 동일하기 때문에 동적으로 변할 일이 없다. 따라서, 더 빠르게 사용자에게 데이터를 전달 할 수 있도록 한다.
   - 개선할만한 점 : page query param이 변하면 다시 refetch 하는데, 이 역시도 정적으로 생성해놓을 방법이 없을까 고민해봐도 좋을 것 같다.
 
-- Next.js + react-query SSG 사용 방법은 `[react-query 에서 제공해주는 hydration과 prefetch를 사용했다.](https://tanstack.com/query/v4/docs/react/guides/ssr#using-hydration)`
+- Next.js + react-query SSG 사용 방법은 [react-query 에서 제공해주는 hydration과 prefetch를 사용했다.](https://tanstack.com/query/v4/docs/react/guides/ssr#using-hydration)
