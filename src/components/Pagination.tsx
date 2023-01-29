@@ -9,10 +9,10 @@ interface Props {
   defaultPage: number;
   count: number;
   range: number;
-  directUrl: string;
+  onChangePage: (value: number) => void;
 }
 
-const Pagination = ({ defaultPage, count, range, directUrl }: Props) => {
+const Pagination = ({ defaultPage, count, range, onChangePage }: Props) => {
   const router = useRouter();
 
   const { pages, currentPage, hasPrevPage, hasNextPage, changePage, goToPrevPage, goToNextPage } =
@@ -23,10 +23,8 @@ const Pagination = ({ defaultPage, count, range, directUrl }: Props) => {
     });
 
   useEffect(() => {
-    if (currentPage === 1) return;
-
-    router.push(directUrl + currentPage);
-  }, [currentPage, directUrl]);
+    onChangePage(currentPage);
+  }, [currentPage, onChangePage]);
 
   return (
     <Container>

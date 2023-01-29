@@ -27,6 +27,10 @@ const PaginationPage = () => {
 
   const { data } = useProducts({ page: page ?? '1' });
 
+  const handleChangePage = (page: number) => {
+    router.push(`/pagination?page=${page}`);
+  };
+
   return (
     <Container>
       {data && <ProductList products={data.products} />}
@@ -35,7 +39,7 @@ const PaginationPage = () => {
           defaultPage={page ? Number(page) : 1}
           count={data.lastPage}
           range={5}
-          directUrl={'/pagination?page='}
+          onChangePage={handleChangePage}
         />
       )}
     </Container>
