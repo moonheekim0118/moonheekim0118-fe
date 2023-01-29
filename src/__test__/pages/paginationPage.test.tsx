@@ -26,7 +26,7 @@ describe('상품 목록 조회 페이지 (페이지네이션)', () => {
     });
   });
 
-  test('상품을 클릭하면 상품 상세(/product/id) 로 이동한다.', async () => {
+  test('상품을 클릭하면 상품 상세페이지 로 이동한다.', async () => {
     const { container } = setUp();
 
     waitFor(() => {
