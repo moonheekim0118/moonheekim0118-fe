@@ -1,10 +1,10 @@
 import type { GetStaticPropsContext, NextPage } from 'next';
-import React from 'react';
+import { useRouter } from 'next/router';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
 
 import useProduct from '../../hooks/products/useProduct';
-import { useRouter } from 'next/router';
-import { dehydrate, QueryClient } from '@tanstack/react-query';
+
 import { getProduct } from '../../apiFetchers/products';
 import { QUERY_KEY } from '../../constants/common';
 import { formatPrice } from '../../utilities';

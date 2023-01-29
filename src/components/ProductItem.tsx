@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { CLIENT_PATHNAME } from '../constants/common';
 
+import { CLIENT_PATHNAME } from '../constants/common';
 import { Product } from '../types/product';
 import { formatPrice } from '../utilities';
 

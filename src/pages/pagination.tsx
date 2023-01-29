@@ -1,13 +1,14 @@
-import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { GetStaticPropsContext, NextPage } from 'next';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+
 import { getProducts } from '../apiFetchers/products';
+
 import Pagination from '../components/Pagination';
 import ProductList from '../components/ProductList';
-import { CLIENT_PATHNAME, QUERY_KEY } from '../constants/common';
-
 import useProducts from '../hooks/products/useProducts';
+import { CLIENT_PATHNAME, QUERY_KEY } from '../constants/common';
 
 const DEFAULT_PAGE = '1';
 const PAGE_RANGE = 5;

@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { getProducts } from '../../apiFetchers/products';
 import { PRODUCTS_PAGINATION_SIZE } from '../../constants/api';
 import { QUERY_KEY } from '../../constants/common';

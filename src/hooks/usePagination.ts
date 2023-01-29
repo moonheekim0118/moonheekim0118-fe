@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 interface Props {

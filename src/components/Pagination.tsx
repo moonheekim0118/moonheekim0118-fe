@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
 
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import usePagination from '../hooks/usePagination';
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 interface Props {
   defaultPage: number;

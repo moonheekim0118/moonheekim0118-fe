@@ -1,12 +1,11 @@
 import type { NextPage } from 'next';
-import React, { FormEvent } from 'react';
+import { FormEvent } from 'react';
 import styled from 'styled-components';
 
 import TextInputField from '../components/TextInputField';
-import { INPUT_ID, INPUT_VALIDATOR } from '../constants/input';
 import useLogin from '../hooks/auth/useLogin';
-
 import useInput from '../hooks/useInput';
+import { INPUT_ID, INPUT_VALIDATOR } from '../constants/input';
 
 const LoginPage: NextPage = () => {
   const userId = useInput({ initialValue: '', validator: INPUT_VALIDATOR[INPUT_ID.USER_ID] });

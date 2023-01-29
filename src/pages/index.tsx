@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import React from 'react';
 import styled from 'styled-components';
 
 import products from '../api/data/products.json';
