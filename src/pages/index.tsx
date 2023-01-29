@@ -7,11 +7,9 @@ import ProductList from '../components/ProductList';
 
 const HomePage: NextPage = () => {
   return (
-    <>
-      <Container>
-        <ProductList products={products.slice(0, 10)} />
-      </Container>
-    </>
+    <Container>
+      <ProductList products={products.slice(0, 10)} />
+    </Container>
   );
 };
 
