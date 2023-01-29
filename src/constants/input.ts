@@ -1,6 +1,9 @@
-const isOnlyAlphanumeric = (value: string) => /^[A-Za-z0-9]*$/.test(value);
-const isContainingAlphanumeric = (value: string) =>
-  isOnlyAlphanumeric(value) && /[A-Z]/.test(value) && /[a-z]/.test(value) && /[0-9]/.test(value);
+const isContainingAlphanumeric = (value: string) => /^[A-Za-z0-9]*$/.test(value);
+const isAlphanumericUnion = (value: string) =>
+  isContainingAlphanumeric(value) &&
+  /[A-Z]/.test(value) &&
+  /[a-z]/.test(value) &&
+  /[0-9]/.test(value);
 
 export const INPUT_ID = {
   USER_ID: 'userId',
@@ -20,9 +23,9 @@ export const INPUT_CONTENTS = {
 
 export const INPUT_VALIDATOR = {
   [INPUT_ID.USER_ID]: (value: string) => {
-    return isOnlyAlphanumeric(value) && value.length >= 5 && value.length <= 30;
+    return isContainingAlphanumeric(value) && value.length >= 5 && value.length <= 30;
   },
   [INPUT_ID.PASSWORD]: (value: string) => {
-    return isContainingAlphanumeric(value) && value.length >= 8 && value.length <= 30;
+    return isAlphanumericUnion(value) && value.length >= 8 && value.length <= 30;
   },
 };
