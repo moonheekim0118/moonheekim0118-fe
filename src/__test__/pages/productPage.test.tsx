@@ -21,7 +21,6 @@ describe('상품 상세 페이지', () => {
     const { container } = setUp('9999');
 
     waitFor(() => {
-      getByText(container, '존재하지 않는 페이지 입니다.');
       expect(getByText(container, '존재하지 않는 페이지 입니다.')).toBeInTheDocument();
     });
   });

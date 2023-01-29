@@ -39,7 +39,6 @@ describe('상품 목록 조회 페이지 (페이지네이션)', () => {
     const { container } = setUp('9999');
 
     waitFor(() => {
-      getByText(container, '존재하지 않는 페이지 입니다.');
       expect(getByText(container, '존재하지 않는 페이지 입니다.')).toBeInTheDocument();
     });
   });
