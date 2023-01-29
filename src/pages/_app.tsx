@@ -1,36 +1,40 @@
 import type { AppProps } from 'next/app';
-import styled from 'styled-components';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RecoilRoot } from 'recoil';
 
 import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
 
+import Layout from '../components/common/Layout';
+import ErrorBoundary from '../components/error/ErrorBoundary';
+
 setupMSW();
 
-function MyApp({ Component, pageProps }: AppProps) {
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+  },
+});
+
+function MyApp(props: AppProps) {
+  const { Component, pageProps } = props;
   return (
-    <>
-      <GlobalStyle />
-      <Background />
-      <Content>
-        <Component {...pageProps} />
-      </Content>
-    </>
+    <RecoilRoot>
+      <QueryClientProvider client={client}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <GlobalStyle />
+          <Layout>
+            <ErrorBoundary>
+              <Component {...pageProps} />
+            </ErrorBoundary>
+          </Layout>
+        </Hydrate>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 
 export default MyApp;
-
-const Background = styled.div`
-  position: fixed;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  background-color: #f0f0f5;
-`;
-
-const Content = styled.div`
-  width: 420px;
-  min-height: 100%;
-  margin: 0 auto;
-  background-color: #fff;
-`;

@@ -1,44 +1,58 @@
-import Link from 'next/link';
-import type { NextPage } from 'next';
-import React from 'react';
+import type { GetStaticPropsContext, NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
 
-import products from '../../api/data/products.json';
+import useProduct from '../../hooks/products/useProduct';
+
+import { getProduct } from '../../apiFetchers/products';
+import { QUERY_KEY } from '../../constants/api';
+import { formatPrice } from '../../utilities';
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { id: '1' } }],
+    fallback: true,
+  };
+};
+
+export async function getStaticProps(ctx: GetStaticPropsContext) {
+  const queryClient = new QueryClient();
+  const id = (ctx.params?.id as string) || '1';
+
+  await queryClient.prefetchQuery(QUERY_KEY.product(id), getProduct);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 const ProductDetailPage: NextPage = () => {
-  const product = products[0];
+  const router = useRouter();
+  const { id } = router.query;
+
+  const { data: product } = useProduct({
+    id: id as string,
+  });
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
-      <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
-      <ProductInfoWrapper>
-        <Name>{product.name}</Name>
-        <Price>{product.price}원</Price>
-      </ProductInfoWrapper>
+      {product && (
+        <>
+          <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
+          <ProductInfoWrapper>
+            <Name>{product.name}</Name>
+            <Price>{formatPrice(product.price)}원</Price>
+          </ProductInfoWrapper>
+        </>
+      )}
     </>
   );
 };
 
 export default ProductDetailPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Thumbnail = styled.img`
   width: 100%;

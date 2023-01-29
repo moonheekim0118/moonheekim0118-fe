@@ -1,0 +1,25 @@
+import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+
+import { login, LoginParams, LoginResponse } from '../../apiFetchers/auth';
+import { CLIENT_PATHNAME } from '../../constants/common';
+import { QUERY_KEY } from '../../constants/api';
+import { authStore } from './utils';
+
+const useLogin = () => {
+  const router = useRouter();
+
+  return useMutation<LoginResponse, AxiosError, LoginParams>(
+    QUERY_KEY.login(),
+    ({ id, password }) => login({ id, password }),
+    {
+      onSuccess: (data) => {
+        authStore.set({ accessToken: data.accessToken, userId: data.user.id });
+        router.push(CLIENT_PATHNAME.HOME);
+      },
+    }
+  );
+};
+
+export default useLogin;

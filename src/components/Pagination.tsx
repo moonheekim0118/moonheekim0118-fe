@@ -1,21 +1,46 @@
-import React from 'react';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+
+import usePagination from '../hooks/usePagination';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
-const Pagination = () => {
+type PaginationProps = {
+  defaultPage: number;
+  count: number;
+  range: number;
+  onChangePage: (value: number) => void;
+};
+
+const Pagination = ({ defaultPage, count, range, onChangePage }: PaginationProps) => {
+  const { pages, currentPage, hasPrevPage, hasNextPage, changePage, goToPrevPage, goToNextPage } =
+    usePagination({
+      count,
+      range,
+      defaultPage,
+    });
+
+  useEffect(() => {
+    onChangePage(currentPage);
+  }, [currentPage]);
+
   return (
     <Container>
-      <Button disabled>
+      <Button disabled={!hasPrevPage} onClick={goToPrevPage}>
         <VscChevronLeft />
       </Button>
       <PageWrapper>
-        {[1, 2, 3, 4, 5].map((page) => (
-          <Page key={page} selected={page === 1} disabled={page === 1}>
+        {pages.map((page) => (
+          <Page
+            key={page}
+            selected={page === currentPage}
+            disabled={page === currentPage}
+            onClick={() => changePage(page)}
+          >
             {page}
           </Page>
         ))}
       </PageWrapper>
-      <Button disabled={false}>
+      <Button disabled={!hasNextPage} onClick={goToNextPage}>
         <VscChevronRight />
       </Button>
     </Container>

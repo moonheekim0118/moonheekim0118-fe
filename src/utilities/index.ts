@@ -11,3 +11,5 @@ export const parseQueryString = (search: string): Record<string, string> =>
 
       return acc;
     }, {} as Record<string, string>);
+
+export const formatPrice = (price: number) => price.toLocaleString('kr');

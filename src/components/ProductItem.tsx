@@ -1,18 +1,22 @@
 import styled from 'styled-components';
 
+import { CLIENT_PATHNAME } from '../constants/common';
 import { Product } from '../types/product';
+import { formatPrice } from '../utilities';
 
 type ProductItemProps = {
   product: Product;
 };
 
-const ProductItem = ({ product: { name, thumbnail, price } }: ProductItemProps) => (
-  <Container>
-    <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
-    <Name>{name}</Name>
-    <Price>{price}</Price>
-  </Container>
-);
+const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => {
+  return (
+    <Container href={`${CLIENT_PATHNAME.PRODUCTS}/${id}`}>
+      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} loading='lazy' />
+      <Name>{name}</Name>
+      <Price>{formatPrice(price)}원</Price>
+    </Container>
+  );
+};
 
 export default ProductItem;
 
