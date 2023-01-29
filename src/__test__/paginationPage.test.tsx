@@ -1,4 +1,4 @@
-import { fireEvent, getByText, waitFor } from '@testing-library/react';
+import { getByText, waitFor } from '@testing-library/react';
 import Pagination from '../pages/pagination';
 import '@testing-library/jest-dom';
 import { customRender } from './customRender';
