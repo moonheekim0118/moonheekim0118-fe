@@ -29,7 +29,7 @@ const PaginationPage = () => {
 
   return (
     <Container>
-      {data && <ProductList products={data.products.slice(0, 10)} />}
+      {data && <ProductList products={data.products} />}
       {data && (
         <Pagination
           defaultPage={page ? Number(page) : 1}
