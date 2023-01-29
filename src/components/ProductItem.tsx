@@ -12,7 +12,7 @@ const formatPrice = (price: number) => price.toLocaleString('kr');
 const ProductItem = ({ product: { id, name, thumbnail, price } }: ProductItemProps) => {
   return (
     <Container href={`${CLIENT_PATHNAME.PRODUCTS}/${id}`}>
-      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
+      <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} loading='lazy' />
       <Name>{name}</Name>
       <Price>{formatPrice(price)}원</Price>
     </Container>
