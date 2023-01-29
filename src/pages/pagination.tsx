@@ -1,5 +1,5 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { GetStaticPropsContext } from 'next';
+import { GetStaticPropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { getProducts } from '../apiFetchers/products';
@@ -9,9 +9,11 @@ import { CLIENT_PATHNAME, QUERY_KEY } from '../constants/common';
 
 import useProducts from '../hooks/products/useProducts';
 
+const DEFAULT_PAGE = '1';
+
 export async function getStaticProps(ctx: GetStaticPropsContext) {
   const queryClient = new QueryClient();
-  const page = (ctx.params?.page as string) || '1';
+  const page = (ctx.params?.page as string) || DEFAULT_PAGE;
 
   await queryClient.prefetchQuery(QUERY_KEY.products(page), getProducts);
 
@@ -22,11 +24,11 @@ export async function getStaticProps(ctx: GetStaticPropsContext) {
   };
 }
 
-const PaginationPage = () => {
+const PaginationPage: NextPage = () => {
   const router = useRouter();
   const { page } = router.query;
 
-  const { data } = useProducts({ page: (page as string) ?? '1' });
+  const { data } = useProducts({ page: (page as string) ?? DEFAULT_PAGE });
 
   const handleChangePage = (page: number) => {
     router.push(`${CLIENT_PATHNAME.PAGINATION}?page=${page}`);
