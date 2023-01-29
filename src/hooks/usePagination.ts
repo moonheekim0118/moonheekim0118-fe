@@ -6,17 +6,17 @@ interface Props {
   defaultPage: number;
 }
 
-const getCurrentRage = (currentPage: number, range: number): number => {
-  const criteria = currentPage % range === 0 ? currentPage - 1 : currentPage;
+const getRangeNumber = (page: number, range: number): number => {
+  const currentRange = page % range === 0 ? page - 1 : page;
 
-  return Math.floor(criteria / range) + 1;
+  return Math.floor(currentRange / range) + 1;
 };
 
 const usePagination = ({ count, range, defaultPage }: Props) => {
   const [currentPage, setCurrentPage] = useState(defaultPage);
 
   const pages = useMemo(() => {
-    const currentRange = getCurrentRage(currentPage, range);
+    const currentRange = getRangeNumber(currentPage, range);
     const pages = [];
 
     for (let i = 1; i <= range; i++) {
@@ -28,23 +28,24 @@ const usePagination = ({ count, range, defaultPage }: Props) => {
     return pages;
   }, [currentPage, count, range]);
 
-  const hasPrevPage = getCurrentRage(currentPage, range) > 1;
-  const hasNextPage = getCurrentRage(currentPage, range) < getCurrentRage(count, range);
+  const hasPrevPage = getRangeNumber(currentPage, range) > 1;
+  const hasNextPage = getRangeNumber(currentPage, range) < getRangeNumber(count, range);
 
   const changePage = (page: number) => {
     if (page === currentPage) return;
+
     setCurrentPage(page);
   };
 
   const goToPrevPage = () => {
-    const currentRange = getCurrentRage(currentPage, range);
+    const currentRange = getRangeNumber(currentPage, range);
     const page = currentRange * range - range;
 
     setCurrentPage(page);
   };
 
   const goToNextPage = () => {
-    const currentRange = getCurrentRage(currentPage, range);
+    const currentRange = getRangeNumber(currentPage, range);
     const page = currentRange * range + 1;
 
     setCurrentPage(page);
