@@ -14,6 +14,7 @@ const useGetUser = () => {
         name: data.user.name,
       });
     },
+    enabled: !!authStore.getUserID(),
   });
 };
 
