@@ -1,4 +1,4 @@
-import { render, fireEvent, getByText } from '@testing-library/react';
+import { fireEvent, getByText } from '@testing-library/react';
 import Login from '../pages/login';
 import '@testing-library/jest-dom';
 import { INPUT_CONTENTS, INPUT_ID } from '../constants/input';
