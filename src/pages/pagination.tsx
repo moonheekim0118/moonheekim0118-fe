@@ -10,6 +10,7 @@ import { CLIENT_PATHNAME, QUERY_KEY } from '../constants/common';
 import useProducts from '../hooks/products/useProducts';
 
 const DEFAULT_PAGE = '1';
+const PAGE_RANGE = 5;
 
 export async function getStaticProps(ctx: GetStaticPropsContext) {
   const queryClient = new QueryClient();
@@ -36,14 +37,16 @@ const PaginationPage: NextPage = () => {
 
   return (
     <Container>
-      {data && <ProductList products={data.products} />}
       {data && (
-        <Pagination
-          defaultPage={page ? Number(page) : 1}
-          count={data.lastPage}
-          range={5}
-          onChangePage={handleChangePage}
-        />
+        <>
+          <ProductList products={data.products} />
+          <Pagination
+            defaultPage={page ? Number(page) : Number(DEFAULT_PAGE)}
+            count={data.lastPage}
+            range={PAGE_RANGE}
+            onChangePage={handleChangePage}
+          />
+        </>
       )}
     </Container>
   );
