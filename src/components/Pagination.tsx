@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 import usePagination from '../hooks/usePagination';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
-interface Props {
+type PaginationProps = {
   defaultPage: number;
   count: number;
   range: number;
   onChangePage: (value: number) => void;
-}
+};
 
-const Pagination = ({ defaultPage, count, range, onChangePage }: Props) => {
+const Pagination = ({ defaultPage, count, range, onChangePage }: PaginationProps) => {
   const { pages, currentPage, hasPrevPage, hasNextPage, changePage, goToPrevPage, goToNextPage } =
     usePagination({
       count,

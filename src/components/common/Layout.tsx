@@ -7,11 +7,11 @@ import useUserLoggedIn from '../../hooks/auth/useUserLoggedIn';
 import useLogout from '../../hooks/auth/useLogout';
 import { CLIENT_PATHNAME } from '../../constants/common';
 
-interface Props {
+type LayoutProps = {
   children: ReactNode;
-}
+};
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
 
   const { isLoggedIn, user } = useUserLoggedIn();

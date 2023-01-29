@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 import { INPUT_CONTENTS } from '../constants/input';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+type TextInputFieldProps = {
   isError: boolean;
   id: string;
-}
-const TextInputField = ({ id, isError, ...props }: Props) => {
+} & InputHTMLAttributes<HTMLInputElement>;
+
+const TextInputField = ({ id, isError, ...props }: TextInputFieldProps) => {
   return (
     <Container>
       <Label htmlFor={id}>{INPUT_CONTENTS[id].label}</Label>

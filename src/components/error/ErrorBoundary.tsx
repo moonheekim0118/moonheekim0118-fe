@@ -1,16 +1,16 @@
 import { Component, ReactNode } from 'react';
 import RuntimeError from './RuntimeError';
 
-interface Props {
+type ErrorBoundaryProps = {
   children: ReactNode;
-}
+};
 
-interface State {
+type State = {
   hasError: boolean;
   fallback: () => ReactNode;
-}
+};
 
-class ErrorBoundary extends Component<Props> {
+class ErrorBoundary extends Component<ErrorBoundaryProps> {
   public state: State = {
     hasError: false,
     fallback: RuntimeError,
