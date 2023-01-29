@@ -12,19 +12,17 @@ const PaginationPage = () => {
   const { data } = useProducts({ page: page ?? '1' });
 
   return (
-    <div>
-      <Container>
-        {data && <ProductList products={data.products.slice(0, 10)} />}
-        {data && (
-          <Pagination
-            defaultPage={page ? Number(page) : 1}
-            count={data.lastPage}
-            range={5}
-            directUrl={'/pagination?page='}
-          />
-        )}
-      </Container>
-    </div>
+    <Container>
+      {data && <ProductList products={data.products.slice(0, 10)} />}
+      {data && (
+        <Pagination
+          defaultPage={page ? Number(page) : 1}
+          count={data.lastPage}
+          range={5}
+          directUrl={'/pagination?page='}
+        />
+      )}
+    </Container>
   );
 };
 

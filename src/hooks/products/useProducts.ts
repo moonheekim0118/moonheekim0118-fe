@@ -8,6 +8,7 @@ interface Props {
 
 const useProducts = ({ page }: Props) => {
   return useQuery(['products', page], getProducts, {
+    useErrorBoundary: true,
     select: ({ products, totalCount }) => {
       return {
         products: products,

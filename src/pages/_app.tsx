@@ -6,6 +6,7 @@ import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
 
 import Layout from '../components/common/Layout';
+import ErrorBoundary from '../components/error/ErrorBoundary';
 
 setupMSW();
 
@@ -25,7 +26,9 @@ function MyApp(props: AppProps) {
       <QueryClientProvider client={client}>
         <GlobalStyle />
         <Layout>
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
         </Layout>
       </QueryClientProvider>
     </RecoilRoot>

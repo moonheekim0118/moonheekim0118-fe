@@ -7,6 +7,7 @@ interface Props {
 
 const useProduct = ({ id }: Props) => {
   return useQuery(['product', id], getProduct, {
+    useErrorBoundary: true,
     select: (data) => {
       return data.product;
     },
