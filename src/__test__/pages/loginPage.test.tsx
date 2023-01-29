@@ -1,8 +1,8 @@
 import { fireEvent, getByText } from '@testing-library/react';
-import Login from '../pages/login';
+import Login from '../../pages/login';
 import '@testing-library/jest-dom';
-import { INPUT_CONTENTS, INPUT_ID } from '../constants/input';
-import { customRender } from './customRender';
+import { INPUT_CONTENTS, INPUT_ID } from '../../constants/input';
+import { customRender } from '../customRender';
 
 const setUp = () => {
   const utils = customRender(<Login />);
