@@ -53,3 +53,9 @@
   - 개선할만한 점 : page query param이 변하면 다시 refetch 하는데, 이 역시도 정적으로 생성해놓을 방법이 없을까 고민해봐도 좋을 것 같다.
 
 - Next.js + react-query SSG 사용 방법은 [react-query 에서 제공해주는 hydration과 prefetch를 사용했다.](https://tanstack.com/query/v4/docs/react/guides/ssr#using-hydration)
+
+- [x] 효율적인 리팩터링을 위해 페이지,컴포넌트 렌더 테스트 작성
+  - [x] 로그인 페이지
+  - [x] 상품 목록 조회 페이지 (Pagination)
+  - [x] 상품 상세 페이지
+  - [x] Pagination 컴포넌트
