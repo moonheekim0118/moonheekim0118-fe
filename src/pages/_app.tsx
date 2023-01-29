@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
 
 import setupMSW from '../api/setup';
@@ -24,12 +24,14 @@ function MyApp(props: AppProps) {
   return (
     <RecoilRoot>
       <QueryClientProvider client={client}>
-        <GlobalStyle />
-        <Layout>
-          <ErrorBoundary>
-            <Component {...pageProps} />
-          </ErrorBoundary>
-        </Layout>
+        <Hydrate state={pageProps.dehydratedState}>
+          <GlobalStyle />
+          <Layout>
+            <ErrorBoundary>
+              <Component {...pageProps} />
+            </ErrorBoundary>
+          </Layout>
+        </Hydrate>
       </QueryClientProvider>
     </RecoilRoot>
   );

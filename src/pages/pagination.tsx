@@ -1,9 +1,25 @@
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { getProducts } from '../apiFetchers/products';
 import Pagination from '../components/Pagination';
 import ProductList from '../components/ProductList';
 
 import useProducts from '../hooks/products/useProducts';
+
+export async function getStaticProps(ctx: GetStaticPropsContext) {
+  const queryClient = new QueryClient();
+  const page = parseInt(ctx.params?.page as string) || 1;
+
+  await queryClient.prefetchQuery(['products', page], getProducts);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 const PaginationPage = () => {
   const router = useRouter();

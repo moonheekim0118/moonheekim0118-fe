@@ -41,3 +41,15 @@
 
 - [x] 상품 상세 조회 API 를 사용하여 id 에 해당하는 상품을 보여준다.
 - [x] 존재하지 않는 상품에 접근 시 에러 처리를 한다.
+
+## 그 외
+
+- [x] 제품 상세 페이지 Static-Site-Generation 렌더링
+  - 이유 : 제품 id 별로 보여주는 페이지는 모든 사용자에게 동일하기 때문에 동적으로 변할 일이 없다. 따라서, 더 빠르게 사용자에게 데이터를 전달 할 수 있도록 한다.
+  - 개선할만한 점 : 미리 정적으로 생성 해놓을 페이지의 범위를 정해놓지 못했다. 일단은 1번 페이지만 생성 해놓고, 나머지 페이지는 fallback 처리 되도록 했다.
+- [x] 제품 목록 조회(페이지네이션) 페이지 Static-Site-Generation 렌더링
+
+  - 이유 : 제품 목록 페이지는 모든 사용자에게 동일하기 때문에 동적으로 변할 일이 없다. 따라서, 더 빠르게 사용자에게 데이터를 전달 할 수 있도록 한다.
+  - 개선할만한 점 : page query param이 변하면 다시 refetch 하는데, 이 역시도 정적으로 생성해놓을 방법이 없을까 고민해봐도 좋을 것 같다.
+
+- Next.js + react-query SSG 사용 방법은 `[react-query 에서 제공해주는 hydration과 prefetch를 사용했다.](https://tanstack.com/query/v4/docs/react/guides/ssr#using-hydration)`

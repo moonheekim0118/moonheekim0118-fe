@@ -1,9 +1,31 @@
-import type { NextPage } from 'next';
+import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 
 import useProduct from '../../hooks/products/useProduct';
 import { useRouter } from 'next/router';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { getProduct } from '../../apiFetchers/products';
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { id: '1' } }],
+    fallback: true,
+  };
+};
+
+export async function getStaticProps(ctx: GetStaticPropsContext) {
+  const queryClient = new QueryClient();
+  const page = parseInt(ctx.params?.id as string) || 1;
+
+  await queryClient.prefetchQuery(['product', page], getProduct);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 const ProductDetailPage: NextPage = () => {
   const router = useRouter();
